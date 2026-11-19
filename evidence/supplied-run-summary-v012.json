@@ -1,0 +1,20 @@
+{
+  "input": "logs_120323213749.zip",
+  "input_sha256": "772b9513e9cb679fdbc28eb2cad4113524edc9c98f57681b84369c7121a2c7ce",
+  "source_commit": "cb101d2ce0e3521df08e591f816e4e01d46b6f45",
+  "observed_tasks": [
+    ":app:compileDebugJavaWithJavac",
+    ":app:testDebugUnitTest",
+    ":app:assembleDebug"
+  ],
+  "failed_task": ":app:lintDebug",
+  "error_id": "NewApi",
+  "error_attribute": "android:windowLightNavigationBar",
+  "attribute_min_api": 27,
+  "project_min_api": 26,
+  "reported_errors": 1,
+  "reported_warnings": 4,
+  "warning_details_in_uploaded_log": false,
+  "apk_verification_and_publish_completed": false,
+  "current_v013_cloud_run_executed_here": false
+}

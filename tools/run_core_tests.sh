@@ -1,6 +1,8 @@
 #!/bin/sh
 set -eu
 cd "$(dirname "$0")/.."
+# Fast resource-placement regression; real Android lint still runs separately in CI.
+python3 tools/test_android_resources.py
 mkdir -p .test-build/classes .test-build/packets
 javac --release 17 -d .test-build/classes app/src/main/java/hk/luce/printerlab/Protocol.java app/src/main/java/hk/luce/printerlab/AttemptPolicy.java app/src/main/java/hk/luce/printerlab/GuidePolicy.java tests/ProtocolTest.java tests/GuidePolicyTest.java tests/ParseSources.java
 java -cp .test-build/classes hk.luce.printerlab.ProtocolTest .test-build/packets

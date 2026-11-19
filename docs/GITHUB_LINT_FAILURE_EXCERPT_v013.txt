@@ -1,0 +1,16 @@
+Source: logs_120323213749.zip
+Member: build/8_Compile APK, run QR unit tests, and Android lint.txt
+Input SHA-256: 772b9513e9cb679fdbc28eb2cad4113524edc9c98f57681b84369c7121a2c7ce
+
+Line 62: > Task :app:compileDebugJavaWithJavac
+Line 70: > Task :app:testDebugUnitTest
+Line 88: > Task :app:assembleDebug
+Line 94: > Task :app:lintDebug FAILED
+Line 95: Lint found 1 errors, 4 warnings. First failure:
+Line 97: /home/runner/work/Luce-Printer-Lab-58/Luce-Printer-Lab-58/app/src/main/res/values/styles.xml:6: Error: android:windowLightNavigationBar requires API level 27 (current min is 26) [NewApi]
+Line 98: <item name="android:windowLightNavigationBar">true</item>
+Line 450: BUILD FAILED in 44s
+Line 452: ##[error]Process completed with exit code 1.
+
+The four warning details are not expanded in this uploaded run log.
+No claim is made that the warnings have been removed.

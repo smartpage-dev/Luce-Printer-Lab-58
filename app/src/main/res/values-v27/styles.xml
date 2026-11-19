@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- This framework attribute was introduced in API 27, not API 26. -->
+    <!-- Explicit inheritance retains all common defaults without duplicating them. -->
+    <style name="AppTheme" parent="@style/PrinterLabBaseTheme">
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+</resources>

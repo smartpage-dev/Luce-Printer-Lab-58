@@ -1,0 +1,8 @@
+PASS SQL 1 original recovery marks interrupted without deleting
+PASS SQL 2 insertion order survives backwards wall-clock jump
+PASS SQL 3 other printer rows excluded
+PASS SQL 4 device tag parameter cannot alter query
+PASS SQL 5 new observation persists without schema migration
+PASS SQL 6 history can still record retained unresolved rows older than 60
+PASS SQL 7 same-device retained history remains intact
+TOTAL 7 SQLite query-contract checks; not Android runtime

@@ -1,4 +1,4 @@
-# Luce Printer Lab 58 - v0.1.2 checked-callback build fix
+# Luce Printer Lab 58 - v0.1.3 API-qualified theme / lint fix
 
 An independent Android foreground test app for assessing Brian's Yokoscan / 58B3 candidate. **Source and build workflow only: no compiled APK is included, no physical printer or Android device was tested here.**
 
@@ -21,21 +21,20 @@ Create a **separate private repository** such as `Luce-Printer-Lab-58`. Copy the
 
 GitHub -> Actions -> **Printer Lab Android APK** -> Run workflow. Accept SDK licenses deliberately. Choose `temporary-test` for a disposable first trial, or `persistent-test` after configuring `PRINTERLAB_TEST_KEYSTORE_BASE64`.
 
-A successful run creates a `PrinterLab58-APK-...` artifact containing `PrinterLab58-debug.apk`, a checksum and build report. The workflow also runs QR encoder unit tests and Android lint. **The supplied v0.1.1 GitHub log failed at a checked UI callback. That cause is fixed here; a new full GitHub build remains required.** If it fails, send the first failed build step / logs, not any private key.
+A successful run creates a `PrinterLab58-APK-...` artifact containing `PrinterLab58-debug.apk`, a checksum and build report. The workflow also runs QR encoder unit tests and Android lint. **The supplied v0.1.2 log passed Java compilation, unit testing and APK assembly, then failed Android lint on a misqualified API-27 theme attribute. This update fixes that resource placement; a new full GitHub run is still required.** If it fails, send the first failed build step / logs, not any private key.
 
 The project has no Gradle wrapper. GitHub installs Gradle 8.11.1. Android Studio can use that exact local Gradle distribution; AGP 8.9.2, JDK 17, SDK 35 / build-tools 35.0.0 are required. Gradle downloads ZXing 3.5.3 and JUnit 4.13.2 at build time. No downloaded SDK or third-party binaries are bundled.
 
-## New in v0.1.2
+## New in v0.1.3
 
-Fixes the user-uploaded GitHub compiler error at MainActivity.java:166. The button
-callback now declares checked exceptions, preserving the existing error handler.
-VersionCode is 3; application identity, journal schema and printing protocol do
-not change. A source-extracted javac regression covers the preview lambda and
-confirmation method reference, with an expected-failure negative control.
+Fixes `NewApi` in `values/styles.xml`: `windowLightNavigationBar` is now confined
+to `values-v27/styles.xml`, sharing an explicit common base theme. API 26 support
+and strict Android lint are retained. VersionCode is 4; the v0.1.2 callback fix,
+all printing/Bluetooth code, database, identity and signing configuration remain.
 
-See **docs/BUILD_FIX_v0.1.2.md** and **UPGRADE_v0.1.2.html**. Commit the update and
-start a NEW Run workflow on the updated branch; rerunning the old failed job uses
-its original source commit. No SDK/signing/workflow-action changes are required.
+Read **UPGRADE_v0.1.3.html** and **docs/LINT_FIX_v0.1.3.md**. Upload both resource
+files, commit/push, and start a NEW workflow on the updated branch. The patch is
+for v0.1.2 only. Do not delete existing app files or clear app data.
 
 ## Guided features retained from v0.1.1
 
@@ -62,7 +61,7 @@ The guide contains the complete test table and failure decision tree.
 
 `bash tools/run_core_tests.sh`
 
-Only a JDK 17+ is needed for the 43 packet/recovery checks, 48 new guidance-rule checks and Java syntax parsing. **These checks do not link Android APIs, exercise Bluetooth, verify SQLite on Android or validate actual printed QR codes.** Gradle unit tests with the actual ZXing dependency are a separate CI step.
+A JDK 17+ and Python 3 are needed for the core checks: 12 focused XML/source cases, 43 packet/recovery assertions, 48 advice assertions, the 14 callback assertions with a negative control, and Java syntax parsing. **These checks do not link Android APIs, exercise Bluetooth, verify SQLite on Android or validate actual printed QR codes.** Gradle unit tests with the actual ZXing dependency are a separate CI step.
 
 ## Signing
 
@@ -74,4 +73,4 @@ Single worker; single selected RFCOMM socket; 12-second connect timeout; 30-seco
 
 ## Evidence and sources
 
-`evidence/core-tests-v011.log`, `evidence/static-checks.json` and `docs/RELEASE_REPORT.md` describe executed and unexecuted checks. `docs/SOURCES.md` separates supplied hardware facts from Android/Epson/GitHub reference material. Epson command definitions are **compatibility hypotheses**, not certification of the 58B3's implementation.
+`evidence/core-tests-v013.log`, `evidence/static-checks.json` and `docs/RELEASE_REPORT.md` describe executed and unexecuted checks. `docs/SOURCES.md` separates supplied hardware facts from Android/Epson/GitHub reference material. Epson command definitions are **compatibility hypotheses**, not certification of the 58B3's implementation.

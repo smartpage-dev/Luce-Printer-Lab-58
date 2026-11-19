@@ -1,0 +1,25 @@
+{
+  "java": "openjdk version \"21.0.12.1\" 2026-08-18\nOpenJDK Runtime Environment (build 21.0.12.1+1-1-deb13u1-Debian)\nOpenJDK 64-Bit Server VM (build 21.0.12.1+1-1-deb13u1-Debian, mixed mode, sharing)",
+  "tools": {
+    "gradle": null,
+    "sdkmanager": null,
+    "adb": null,
+    "javac": "/usr/bin/javac"
+  },
+  "env": {
+    "ANDROID_HOME": null,
+    "ANDROID_SDK_ROOT": null,
+    "JAVA_HOME": null
+  },
+  "dns": {
+    "dl.google.com": {
+      "error": "[Errno -3] Temporary failure in name resolution"
+    },
+    "services.gradle.org": {
+      "error": "[Errno -3] Temporary failure in name resolution"
+    },
+    "repo.maven.apache.org": {
+      "error": "[Errno -3] Temporary failure in name resolution"
+    }
+  }
+}

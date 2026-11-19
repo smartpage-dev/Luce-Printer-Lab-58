@@ -1,3 +1,5 @@
+> Current source version: **v0.1.3-lab / versionCode 4**. Read `UPGRADE_v0.1.3.html` first when updating. The supplied v0.1.2 GitHub run reached compilation, unit tests and APK assembly but failed lint; v0.1.3 needs a new workflow run. Keep the same signing identity. No APK is bundled.
+
 # v0.1.2 build-fix amendment (19 November 2026)
 
 The v0.1.1 GitHub run failed on a checked-exception UI callback. This version fixes

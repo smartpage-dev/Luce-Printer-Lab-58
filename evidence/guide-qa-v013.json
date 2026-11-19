@@ -1,0 +1,65 @@
+{
+  "local_links": [
+    [
+      "START_HERE.html",
+      "UPGRADE_v0.1.3.html",
+      "exists"
+    ],
+    [
+      "UPGRADE_v0.1.3.html",
+      "START_HERE.html",
+      "exists"
+    ],
+    [
+      "UPGRADE_v0.1.3.html",
+      "docs/LINT_FIX_v0.1.3.md",
+      "exists"
+    ]
+  ],
+  "views": [
+    {
+      "file": "UPGRADE_v0.1.3.html",
+      "width": 390,
+      "metrics": {
+        "scroll": 390,
+        "width": 390,
+        "height": 2850
+      },
+      "page_errors": [],
+      "method": "Chromium set_content; all requests blocked"
+    },
+    {
+      "file": "START_HERE.html",
+      "width": 390,
+      "metrics": {
+        "scroll": 390,
+        "width": 390,
+        "height": 8603
+      },
+      "page_errors": [],
+      "method": "Chromium set_content; all requests blocked"
+    },
+    {
+      "file": "UPGRADE_v0.1.3.html",
+      "width": 1280,
+      "metrics": {
+        "scroll": 1280,
+        "width": 1280,
+        "height": 2152
+      },
+      "page_errors": [],
+      "method": "Chromium set_content; all requests blocked"
+    },
+    {
+      "file": "START_HERE.html",
+      "width": 1280,
+      "metrics": {
+        "scroll": 1280,
+        "width": 1280,
+        "height": 5898
+      },
+      "page_errors": [],
+      "method": "Chromium set_content; all requests blocked"
+    }
+  ]
+}

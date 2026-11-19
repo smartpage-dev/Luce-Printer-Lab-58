@@ -42,3 +42,11 @@ ZXing core is an Apache-2.0 dependency retrieved by Gradle, not source copied in
 - GitHub manual workflow default-branch rule: https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow
 - Actions release pages: https://github.com/actions/checkout/releases ; https://github.com/actions/setup-java/releases ; https://github.com/gradle/actions/releases ; https://github.com/actions/upload-artifact/releases
 - Pinned tags used: checkout v7.0.1, setup-java v6.3.0, gradle setup v6.4.1, upload-artifact v7.0.2. A release-page check is not a successful CI execution.
+
+## v0.1.3 evidence and resource references (2026-11-19)
+
+- Exact uploaded GitHub run log: `logs_120323213749.zip`; sanitized excerpt in `GITHUB_LINT_FAILURE_EXCERPT_v013.txt`.
+- `windowLightNavigationBar` was added in API 27: https://developer.android.com/sdk/api_diff/27/changes/android.R.attr
+- Android alternative/default resources: https://developer.android.com/guide/topics/resources/providing-resources
+- GitHub rerun source commit semantics: https://docs.github.com/en/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs
+- Current evidence and limitations: `LINT_FIX_v0.1.3.md`; older reports are historical.

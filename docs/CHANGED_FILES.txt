@@ -1,23 +1,25 @@
-v0.1.2 changes against delivered v0.1.1 (no source deletions)
+v0.1.3 delta from v0.1.2; merge these paths at repository root.
+No deletions. No source migration. No APK included.
 
 README.md
 SHA256SUMS.txt
 START_HERE.html
-UPGRADE_v0.1.2.html
+UPGRADE_v0.1.3.html
 app/build.gradle
-app/src/main/java/hk/luce/printerlab/MainActivity.java
-docs/BUILD_FIX_v0.1.2.md
+app/src/main/res/values-v27/styles.xml
+app/src/main/res/values/styles.xml
 docs/CHANGED_FILES.txt
-docs/GITHUB_BUILD_FAILURE_EXCERPT.txt
+docs/GITHUB_LINT_FAILURE_EXCERPT_v013.txt
+docs/LINT_FIX_v0.1.3.md
 docs/QUICK_START_ZH.md
 docs/RELEASE_REPORT.md
-docs/history/RELEASE_REPORT_v0.1.1.md
-evidence/callback-regression-v012.log
-evidence/core-tests-v012.log
-evidence/environment-v012.json
-evidence/journal-sql-v012.log
-evidence/original-callback-reproduction-v012.log
-evidence/structural-run-v012.log
-evidence/upgrade-guide-qa-v012.json
+docs/SOURCES.md
+docs/history/RELEASE_REPORT_v0.1.2.md
+evidence/core-tests-v013.log
+evidence/environment-v013.json
+evidence/guide-qa-v013.json
+evidence/journal-sql-v013.log
+evidence/structural-run-v013.log
+evidence/supplied-run-summary-v012.json
 tools/run_core_tests.sh
-tools/test_ui_callbacks.py
+tools/test_android_resources.py
