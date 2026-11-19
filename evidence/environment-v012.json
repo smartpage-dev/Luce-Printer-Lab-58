@@ -1,0 +1,14 @@
+{
+  "checked_at": "2026-11-19",
+  "local_javac": "javac 21.0.12.1",
+  "callback_test_target": "--release 17",
+  "local_gradle": null,
+  "local_sdkmanager": null,
+  "native_android_build": false,
+  "google_repository_probe": "curl failed: Could not resolve host: dl.google.com",
+  "github_workflow_run_by_assistant": false,
+  "apk_in_package": false,
+  "hardware_test": false,
+  "uploaded_log_sha256": "f0bc61a1722371fc72743048586198b5fc3f732b17e8b5688012734d1e2f141d",
+  "baseline_zip_sha256": "db6299a363667a74de431c3a614a4cb73470cc55ab00f875d8c3d51b69ecf848"
+}

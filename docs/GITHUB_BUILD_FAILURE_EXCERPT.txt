@@ -1,0 +1,18 @@
+SOURCE: logs_120318232676.zip
+ENTRY: build/8_Compile APK, run QR unit tests, and Android lint.txt
+EVENT TIME (UTC): 2026-11-19T02:58:58Z
+Relevant excerpt only; runner home/repository path shortened to app/.
+
+> Task :app:compileDebugJavaWithJavac
+app/src/main/java/hk/luce/printerlab/MainActivity.java:166:
+error: incompatible thrown types Exception in functional expression
+    button(print,"Send ONE selected test...",this::confirmPrint,true);
+                                             ^
+1 error
+> Task :app:compileDebugJavaWithJavac FAILED
+Execution failed for task ':app:compileDebugJavaWithJavac'.
+
+The same archive records successful checkout, Java/Gradle setup, SDK setup,
+and the pure-Java/source checks before this step. The APK artifact and APK
+verification steps did not run after the compilation failure.
+This is a source-code compile failure, not a Bluetooth hardware test result.

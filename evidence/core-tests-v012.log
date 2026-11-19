@@ -1,0 +1,114 @@
+PASS 1 short demo accepted
+PASS 2 long demo accepted
+PASS 3 reject cleartext URL
+PASS 4 reject URL credentials
+PASS 5 reject control injection
+PASS 6 reject non-ASCII QR input
+PASS 7 bound QR input
+PASS 8 reject raw ASCII command injection
+PASS 9 plain text has no initial ESC
+PASS 10 init explicit
+PASS 11 test ID validated
+PASS 12 native model 2 bytes
+PASS 13 native module bytes
+PASS 14 native M correction bytes
+PASS 15 native length and exact stored payload
+PASS 16 native print opcode
+PASS 17 reject native module zero
+PASS 18 bound native module size
+PASS 19 raster width bytes and row count
+PASS 20 MSB horizontal packing and white padding
+PASS 21 reject ragged raster
+PASS 22 limit width
+PASS 23 limit height
+PASS 24 limit packet size
+PASS 25 column header and 24-dot line spacing
+PASS 26 column MSB packing
+PASS 27 column partial last band padding
+PASS 28 line spacing restored
+PASS 29 bounded grid dimensions
+PASS 30 single explicit status query
+PASS 31 write is not print confirmation
+PASS 32 no completed writes does not prove no partial bytes
+PASS 33 flush/ack uncertainty
+PASS 34 crash does not replay
+PASS 35 restart preserves completed transfer status
+PASS 36 no auto retry sending
+PASS 37 no auto retry sent_unconfirmed
+PASS 38 no auto retry outcome_unknown
+PASS 39 no auto retry interrupted_unknown
+PASS 40 unrecognized evidence not allowed
+PASS 41 operator QR evidence distinct
+PASS 42 error excludes private messages
+PASS 43 SHA256 reference
+TOTAL 43 pure-Java checks passed; no Bluetooth or hardware exercised
+PASS GUIDE 1 no automatic device selection [SELECT_DEVICE]
+PASS GUIDE 2 empty identity never matches [SELECT_DEVICE]
+PASS GUIDE 3 no automatic connect [CONNECT]
+PASS GUIDE 4 first step A
+PASS GUIDE 5 A verified leads to B selection
+PASS GUIDE 6 B verified leads to native short QR
+PASS GUIDE 7 appearance alone cannot pass QR [VERIFY_QR]
+PASS GUIDE 8 native short exact decode leads to long
+PASS GUIDE 9 native long result ends without certifying skipped steps [NATIVE_LONG_RECORDED]
+PASS GUIDE 10 grid must precede raster QR
+PASS GUIDE 11 raster short leads to raster long
+PASS GUIDE 12 raster round finish is not certification [RASTER_ROUND_DONE]
+PASS GUIDE 13 manual QR result H [MANUAL_RESULT_RECORDED]
+PASS GUIDE 14 manual QR result J [MANUAL_RESULT_RECORDED]
+PASS GUIDE 15 manual QR result K [MANUAL_RESULT_RECORDED]
+PASS GUIDE 16 Chinese result recorded separately [MANUAL_RESULT_RECORDED]
+PASS GUIDE 17 QR evidence cannot certify text [REVIEW_RESULT]
+PASS GUIDE 18 unobserved sent_unconfirmed [OBSERVE]
+PASS GUIDE 19 no selection while unobserved sent_unconfirmed
+PASS GUIDE 20 unobserved outcome_unknown [OBSERVE]
+PASS GUIDE 21 no selection while unobserved outcome_unknown
+PASS GUIDE 22 unobserved interrupted_unknown [OBSERVE]
+PASS GUIDE 23 no selection while unobserved interrupted_unknown
+PASS GUIDE 24 sending remains a barrier [WAIT]
+PASS GUIDE 25 identity failure stops qr_decoded_mismatch [STOP_IDENTITY]
+PASS GUIDE 26 identity failure stops wrong_device [STOP_IDENTITY]
+PASS GUIDE 27 garbled/legacy failure stops partial_or_garbled [STOP_BUFFER]
+PASS GUIDE 28 garbled/legacy failure stops bad_or_no_output [STOP_BUFFER]
+PASS GUIDE 29 manual fallback only no_output [REVIEW_FAILURE]
+PASS GUIDE 30 cannot select fallback automatically no_output
+PASS GUIDE 31 manual fallback only qr_unreadable [REVIEW_FAILURE]
+PASS GUIDE 32 cannot select fallback automatically qr_unreadable
+PASS GUIDE 33 other printer evidence cannot advance or block selected printer
+PASS GUIDE 34 newer other-printer entry ignored
+PASS GUIDE 35 older unresolved attempt not lost behind later success [OBSERVE]
+PASS GUIDE 36 unresolved test ID shown exactly
+PASS GUIDE 37 observe uncertainty even when disconnected [OBSERVE]
+PASS GUIDE 38 verified result does not connect automatically [CONNECT]
+PASS GUIDE 39 manual physical observation remains distinct from transport uncertainty
+PASS GUIDE 40 uses latest observation even if rows unordered
+PASS GUIDE 41 unknown method does not guess opcode [UNKNOWN_TEST]
+PASS GUIDE 42 missing method is not a crash [UNKNOWN_TEST]
+PASS GUIDE 43 observation is persisted no_output
+PASS GUIDE 44 observation is persisted partial_or_garbled
+PASS GUIDE 45 observation is persisted qr_unreadable
+PASS GUIDE 46 observation is persisted qr_decoded_mismatch
+PASS GUIDE 47 observation is persisted wrong_device
+PASS GUIDE 48 only QR tests require exact decode
+TOTAL 48 guide checks passed; no Android or hardware exercised
+SYNTAX_ONLY: 8 Java files parsed; Android API linkage NOT checked
+PASS UI_CALLBACK 1 both actual call sites registered
+PASS UI_CALLBACK 2 registration does not invoke or print
+PASS UI_CALLBACK 3 both controls remain included in busy locking
+PASS UI_CALLBACK 4 original button presentation retained
+PASS UI_CALLBACK 5 checked-throwing preview lambda executes once
+PASS UI_CALLBACK 6 checked-throwing method reference executes once
+PASS UI_CALLBACK 7 preview checked exception reaches existing error handler
+PASS UI_CALLBACK 8 failed packet never reaches preview; no auto-retry
+PASS UI_CALLBACK 9 confirmation checked exception reaches existing error handler
+PASS UI_CALLBACK 10 failed confirmation is not replayed
+PASS UI_CALLBACK 11 runtime validation error still handled
+PASS UI_CALLBACK 12 ordinary callbacks do not execute during registration
+PASS UI_CALLBACK 13 ordinary callback behavior retained
+PASS UI_CALLBACK 14 fatal JVM errors not disguised as successful actions
+UI_CALLBACK_ASSERTIONS=14
+PASS UI_CALLBACK_NEGATIVE_CONTROL: reverting to Runnable is rejected by javac
+UiCallbackHarness.java:34:42: compiler.err.incompatible.thrown.types.in.mref: java.lang.Exception
+1 error
+
+{"scope": "actual extracted callback + call-site Java semantics with view doubles", "behavior_assertions": 14, "negative_controls": 1, "full_android_build": false, "hardware_test": false}

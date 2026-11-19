@@ -93,7 +93,14 @@ public final class MainActivity extends Activity {
         GradientDrawable bg=new GradientDrawable();bg.setColor(Color.WHITE);bg.setCornerRadius(dp(14));bg.setStroke(dp(1),Color.rgb(212,228,224));c.setBackground(bg);
         LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,-2);p.setMargins(0,dp(10),0,dp(6));root.addView(c,p);c.addView(text(title,20,true));return c;
     }
-    private Button button(LinearLayout box,String name,Runnable action,boolean lock){
+    /** UI callbacks may prepare packets and throw checked exceptions.
+     * Runnable cannot express that contract, even when the listener catches errors.
+     * Keep execution inside the click listener: registration must never print.
+     */
+    @FunctionalInterface
+    private interface CheckedAction { void run() throws Exception; }
+
+    private Button button(LinearLayout box,String name,CheckedAction action,boolean lock){
         Button b=new Button(this);b.setText(name);b.setAllCaps(false);b.setOnClickListener(v->{try{action.run();}catch(Exception e){showError(e);}});
         box.addView(b,new LinearLayout.LayoutParams(-1,-2));if(lock)lockViews.add(b);return b;
     }

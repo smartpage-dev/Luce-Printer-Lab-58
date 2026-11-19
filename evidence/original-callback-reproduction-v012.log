@@ -1,0 +1,4 @@
+UiCallbackHarness.java:33:42: compiler.err.incompatible.thrown.types.in.mref: java.lang.Exception
+1 error
+
+EXPECTED_ORIGINAL_FAILURE: actual helper and call sites reject checked exceptions

@@ -1,0 +1,20 @@
+PASS UI_CALLBACK 1 both actual call sites registered
+PASS UI_CALLBACK 2 registration does not invoke or print
+PASS UI_CALLBACK 3 both controls remain included in busy locking
+PASS UI_CALLBACK 4 original button presentation retained
+PASS UI_CALLBACK 5 checked-throwing preview lambda executes once
+PASS UI_CALLBACK 6 checked-throwing method reference executes once
+PASS UI_CALLBACK 7 preview checked exception reaches existing error handler
+PASS UI_CALLBACK 8 failed packet never reaches preview; no auto-retry
+PASS UI_CALLBACK 9 confirmation checked exception reaches existing error handler
+PASS UI_CALLBACK 10 failed confirmation is not replayed
+PASS UI_CALLBACK 11 runtime validation error still handled
+PASS UI_CALLBACK 12 ordinary callbacks do not execute during registration
+PASS UI_CALLBACK 13 ordinary callback behavior retained
+PASS UI_CALLBACK 14 fatal JVM errors not disguised as successful actions
+UI_CALLBACK_ASSERTIONS=14
+PASS UI_CALLBACK_NEGATIVE_CONTROL: reverting to Runnable is rejected by javac
+UiCallbackHarness.java:34:42: compiler.err.incompatible.thrown.types.in.mref: java.lang.Exception
+1 error
+
+{"scope": "actual extracted callback + call-site Java semantics with view doubles", "behavior_assertions": 14, "negative_controls": 1, "full_android_build": false, "hardware_test": false}

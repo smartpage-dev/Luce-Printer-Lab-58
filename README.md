@@ -1,4 +1,4 @@
-# Luce Printer Lab 58 - v0.1.1 guided engineering diagnostic
+# Luce Printer Lab 58 - v0.1.2 checked-callback build fix
 
 An independent Android foreground test app for assessing Brian's Yokoscan / 58B3 candidate. **Source and build workflow only: no compiled APK is included, no physical printer or Android device was tested here.**
 
@@ -21,11 +21,23 @@ Create a **separate private repository** such as `Luce-Printer-Lab-58`. Copy the
 
 GitHub -> Actions -> **Printer Lab Android APK** -> Run workflow. Accept SDK licenses deliberately. Choose `temporary-test` for a disposable first trial, or `persistent-test` after configuring `PRINTERLAB_TEST_KEYSTORE_BASE64`.
 
-A successful run creates a `PrinterLab58-APK-...` artifact containing `PrinterLab58-debug.apk`, a checksum and build report. The workflow also runs QR encoder unit tests and Android lint. **That workflow has not been executed here; compilation is the next gate.** If it fails, send the first failed build step / logs, not any private key.
+A successful run creates a `PrinterLab58-APK-...` artifact containing `PrinterLab58-debug.apk`, a checksum and build report. The workflow also runs QR encoder unit tests and Android lint. **The supplied v0.1.1 GitHub log failed at a checked UI callback. That cause is fixed here; a new full GitHub build remains required.** If it fails, send the first failed build step / logs, not any private key.
 
 The project has no Gradle wrapper. GitHub installs Gradle 8.11.1. Android Studio can use that exact local Gradle distribution; AGP 8.9.2, JDK 17, SDK 35 / build-tools 35.0.0 are required. Gradle downloads ZXing 3.5.3 and JUnit 4.13.2 at build time. No downloaded SDK or third-party binaries are bundled.
 
-## New in v0.1.1
+## New in v0.1.2
+
+Fixes the user-uploaded GitHub compiler error at MainActivity.java:166. The button
+callback now declares checked exceptions, preserving the existing error handler.
+VersionCode is 3; application identity, journal schema and printing protocol do
+not change. A source-extracted javac regression covers the preview lambda and
+confirmation method reference, with an expected-failure negative control.
+
+See **docs/BUILD_FIX_v0.1.2.md** and **UPGRADE_v0.1.2.html**. Commit the update and
+start a NEW Run workflow on the updated branch; rerunning the old failed job uses
+its original source commit. No SDK/signing/workflow-action changes are required.
+
+## Guided features retained from v0.1.1
 
 The **Guided next step** card reads only evidence for the selected printer. Tap **Refresh suggested next step**, then **Select suggested test (NO PRINT)**. Selection never sends bytes: preview and **Send ONE** still require separate confirmation. The advice is not a lock on the manual dropdown, a compatibility certificate or a retry engine.
 

@@ -1,3 +1,15 @@
+# v0.1.2 build-fix amendment (19 November 2026)
+
+The v0.1.1 GitHub run failed on a checked-exception UI callback. This version fixes
+that cause and adds a source-extracted javac regression. A NEW Run workflow on
+the updated commit is required; do not rerun the old failing commit. See
+`../UPGRADE_v0.1.2.html` and `BUILD_FIX_v0.1.2.md`. No APK is included.
+
+The retained v0.1.1 operational guide follows; its no-build statement describes
+the earlier local delivery, not the new user-uploaded failing GitHub run.
+
+---
+
 # v0.1.1 update
 
 Use START_HERE.html for the new Guided next step card. No automatic send, retry or reconnect. Database schema unchanged; exported report schema /2. Details: CHANGELOG_v0.1.1.md.

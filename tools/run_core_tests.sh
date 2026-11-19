@@ -6,3 +6,6 @@ javac --release 17 -d .test-build/classes app/src/main/java/hk/luce/printerlab/P
 java -cp .test-build/classes hk.luce.printerlab.ProtocolTest .test-build/packets
 java -cp .test-build/classes hk.luce.printerlab.GuidePolicyTest
 java -cp .test-build/classes ParseSources app/src
+
+# Compile the actual UI callback contract, not just a syntax parse.
+python3 tools/test_ui_callbacks.py

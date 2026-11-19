@@ -1,56 +1,113 @@
-# Luce Printer Lab 58 v0.1.1 - guided diagnostic release
+# Printer Lab 58 v0.1.2 - checked-callback build fix
 
-Date: 2026-11-18. Separate Android source/build kit for the purchased Yokoscan / 58B3 sample. No APK is included. No LensDrop, Hostinger, Print Station or other application has been modified.
+Date: 19 November 2026. Application: `hk.luce.printerlab`.
+Version: `0.1.2-lab`; versionCode: `3`.
 
-## Purpose and changes
+## Root cause confirmed in the uploaded source logs
 
-This extends the existing v0.1.0 lab rather than starting another printer-control project. New Guided next step advice is scoped to the selected device's retained observations. It never sends, connects, retries or claims certification. Selection and actual Send ONE remain separate actions. The manual test dropdown remains available: advice is not a transport interlock.
+`logs_120318232676.zip` records a failure in `:app:compileDebugJavaWithJavac`:
+`MainActivity.java:166: error: incompatible thrown types Exception in functional expression`.
+The affected call supplies `this::confirmPrint` to the `button` helper.
+The helper previously accepted `Runnable`; `confirmPrint()` declares `throws Exception`.
+The neighboring preview callback also invokes the checked-throwing `makePacket()`.
+`Runnable.run()` has no checked-exception declaration. Catching `Exception` inside
+the button's listener does not change the target type of the callback.
 
-- A/B text then C/D native QR is the first suggested round. D-only manual success does not imply C passed.
-- Pending/unobserved attempts must be physically checked before the suggested sequence advances.
-- Appearance alone cannot verify QR data. The operator must decode with another phone and compare the complete text.
-- No output, partial/garbled output, unreadable QR, wrong QR data and wrong device are separate observations.
-- Failures stop automatic suggestions; optional E/F/G/H alternatives remain deliberate manual trials after STOP, inspection and restart/reconnect.
-- All retained attempt IDs (up to 500) are accessible in History, not only the latest 60.
-- Guidance uses local insertion order, so a backwards phone-clock change does not reorder the latest result.
-- Private SQLite schema stays 1; report schema becomes luce.printerlab.report/2 with original columns retained. No app-data reset required.
-- Build metadata reads the actual source version; Actions tags pinned to official release versions checked on 2026-11-18.
+The GitHub log confirms that checkout, JDK/Gradle setup, Android SDK setup and
+preliminary tests completed before Java compilation failed. This error does not
+identify a signing-key, printer, Bluetooth, or Hostinger problem. The failure was
+in the supplied application source. Earlier syntax-only parsing did not type-check
+Android activity callback bindings and therefore did not catch it.
 
-## App and signing
+See `GITHUB_BUILD_FAILURE_EXCERPT.txt` for the relevant, minimized log excerpt.
 
-Application ID remains hk.luce.printerlab. Version 0.1.1-lab, versionCode 2. minSdk 26; compile/target 35; build-tools 35.0.0; JDK17; Gradle8.11.1; AGP8.9.2. The original test signing key is needed for an in-place upgrade. Export existing Lab reports before any deliberate reinstall. Never uninstall LensDrop to fix a Lab signing mismatch.
+## Code change
 
-The manual workflow remains Printer Lab Android APK. Its optional secret remains PRINTERLAB_TEST_KEYSTORE_BASE64. No account was connected, no GitHub workflow was triggered, and no signing key is bundled.
+A private `@FunctionalInterface CheckedAction` with `void run() throws Exception`
+now expresses the existing button action contract. The button helper accepts this
+type instead of `Runnable`. The existing click listener still catches exceptions
+and calls `showError`; neither its timing nor the print confirmation flow changes.
 
-## Executed verification on final sources
+Both the preview lambda and the confirmation method reference use the corrected
+contract. The patch does not delete `throws`, ignore a failure, disable lint, add
+an automatic retry, or replace the single-confirmation printing guard.
 
-- 43 actual Protocol/AttemptPolicy Java tests passed.
-- 48 actual GuidePolicy Java tests passed: selected-device isolation, unobserved/unknown outcomes, matching QR evidence, chronology, no automatic transport actions and failure-specific advice.
-- 7 SQLite query-contract tests passed using SQL extracted from Journal.java against Python SQLite. This is not Android SQLite execution.
-- 31 structural checks passed on manifest, source, workflow and helper syntax.
-- 8 Java source files parsed with the JDK compiler parser. This is not Android API linkage.
-- 4 digital raster round trips passed through the actual Java packet writers and independent ZBar decoding. Fixtures are Python-generated; Android ZXing rendering and paper scanning were not exercised. The long fixture still fails one OpenCV detector; this does not establish universal scanner compatibility.
-- The actual guide HTML rendered at 390 and 1280 pixels with no horizontal overflow, script errors or external requests. Native file navigation was blocked by the browser environment; set_content was used. This is documentation QA, not Android UI QA.
+The application version is bumped to `0.1.2-lab` / 3. Application ID, database
+schema 1, report schema 2, pairing, print bytes, BLE inspection, SDK/Gradle versions,
+workflow actions and signing-secret name remain unchanged.
 
-See evidence/*-v011.log, evidence/static-checks.json, evidence/guide-qa.json and evidence/environment-v011.json. Historical v0.1.0 evidence is labelled separately.
+## Regression coverage added
 
-## Explicitly not validated
+`tools/test_ui_callbacks.py` extracts the ACTUAL button helper, CheckedAction
+interface and the two affected registration lines from MainActivity. It compiles
+those fragments with `javac --release 17` using deliberately minimal view doubles.
+It exercises 14 behavioral assertions: registration never executes an action;
+preview and confirmation execute once on click; checked and runtime exceptions
+reach the existing error handler; errors do not trigger automatic retries; busy
+locking remains; fatal JVM errors are not disguised as success.
 
-No Android SDK or Gradle distribution is installed here. Current download probes failed DNS for Google SDK, Gradle and Maven. No APK compilation, Android lint/JUnit run, native UI/lifecycle test or APK install was performed here. The separate GitHub workflow is the intended next build gate, not an executed result.
+A negative control changes only the callback parameter back to Runnable and must
+fail type checking. The same harness, run against the unmodified v0.1.1 source,
+reproduced the original checked-exception compiler diagnostic.
 
-No physical SPP/BLE connection, custom paper output, status reliability, sleep/wake, paper-out, battery, thermal or concurrent camera-upload test has been performed. The candidate's exact Bluetooth protocol and ESC subset remain unknown.
+`tools/run_core_tests.sh` now runs this regression. The existing GitHub workflow
+already calls that script, so no workflow, secrets or permissions change is needed.
+This harness is not Android API compilation, Activity execution or a Bluetooth test.
 
-## Boundaries preserved
+## Executed local validation
 
-Manual foreground-only operation, one selected socket, bounded writes, no automatic retries/reconnects/bulk prints, no INTERNET permission. BLE is service enumeration only, no writes or printing. No USB transport, firmware flashing, permanent settings, sleep/density/black-mark/cutter/cash-drawer commands. ESC @ resets volatile state; close other printer apps. STOP cannot retract bytes already buffered by the printer.
+- 43 protocol/recovery assertions passed.
+- 48 guided-policy assertions passed.
+- 14 actual-extracted callback behavior assertions passed.
+- 1 negative compiler control correctly rejected the original Runnable contract.
+- Original v0.1.1 callback failure reproduced independently with the same harness.
+- 7 extracted SQLite query-contract checks passed.
+- 31 source/manifest/workflow structural checks passed.
+- 8 app/test Java source files syntax-parsed successfully (not API type checking).
 
-Native QR and image commands are compatibility hypotheses, not an assertion that 58B3 supports Epson's entire command set. See docs/SOURCES.md. Bluetooth device address, QR text, pairing PIN and cloud credentials are not included in the audit JSON; phone model, salted device tag and service UUIDs are included.
+Local compiler: OpenJDK javac 21.0.12.1 targeting Java 17 with `--release 17`.
+The uploaded GitHub run used JDK 17.0.21. The checked-exception rule is not an
+Android-version workaround; dependency versions have not been changed.
 
-## First physical check
+No new digital QR/raster decoder run is claimed in this patch; the unchanged
+historical results are retained separately. No unit-test or lint success from a
+full Android Gradle build is claimed. Android SDK/Gradle are not installed in the
+local environment and the Google SDK repository lookup fails DNS resolution.
+There is no APK in the package, no new GitHub workflow run by this assistant,
+and no printer or phone hardware validation.
 
-After a successful GitHub build, pair the sample in Android Settings, select it in the Lab, inspect SDP and try secure SPP. Use A once, record the paper result, then B and C individually. Use fake URLs. Send the JSON report with matching Test-ID paper photos. On a build failure provide the first compiler/setup error instead, without credentials.
+## Apply and build
 
-## Baseline provenance
+1. Use the PATCH package only over the existing v0.1.1 repository. Copy its
+   contents to the repository root, preserving each path. It contains changed or
+   added files only, and is not a standalone project.
+2. Or use the FULL GitHub-ready package as the complete project snapshot. Preserve
+   your local `.git` directory and GitHub signing secret. Do not put an extra
+   enclosing `PrinterLab58_v0.1.2` folder inside the repository root.
+3. Commit the source changes to the branch that will be built. A suitable message:
+   `Fix checked UI callbacks - Printer Lab v0.1.2`.
+4. Verify `app/build.gradle` shows versionName `0.1.2-lab` and versionCode `3`.
+5. Start a NEW run: Actions > Printer Lab Android APK > Run workflow > select the
+   updated branch, normally main. Accept SDK licenses and retain your intended
+   signing mode. Do not use Re-run jobs on the old failed run: it uses the old SHA.
+6. Only a successful run produces the verified downloadable APK artifact. Check
+   BUILD_INFO.json for version `0.1.2-lab` and the newly committed SHA.
+7. A new compiler/lint/test failure needs its new logs. Do not disable tests or
+   lint, clear LensDrop data, change printer settings, or rotate keys to hide it.
 
-Original v0.1.0 archive SHA-256: 3ec9aa3ebdfad81f045d891284cbe6d5aadc0361f54e9dec06e43b7a8091f8ba
-The original archive is preserved unchanged. This package is source, documentation and reproducible tests only.
+The default persistent test secret remains `PRINTERLAB_TEST_KEYSTORE_BASE64`.
+The uploaded failure produced no downloadable APK, so it does not itself require
+an app uninstall. Preserve any earlier installed app's reports and signing key.
+
+## References and evidence
+
+- Uploaded build log: `logs_120318232676.zip`, compile-step lines 64-84.
+- Original source: `Luce_PrinterLab58_v0.1.1_Guided_GitHub_Ready.zip`.
+- Java SE 17 Runnable: https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/Runnable.html
+- Java SE 17 checked exceptions: https://docs.oracle.com/javase/specs/jls/se17/html/jls-11.html
+- GitHub manual workflow: https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow
+- GitHub rerun commit behavior: https://docs.github.com/en/actions/how-tos/manage-workflow-runs/re-run-workflows-and-jobs
+
+Primary technical references reviewed on 19 November 2026. Release assertions
+above are based on supplied logs/source and the attached local test outputs, not
+on a new GitHub execution. Archived v0.1.0/v0.1.1 evidence is historical.

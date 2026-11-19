@@ -1,0 +1,22 @@
+[
+  {
+    "width": 390,
+    "dimensions": {
+      "width": 390,
+      "body": 390,
+      "doc": 390
+    },
+    "page_errors": [],
+    "mode": "static HTML only; no native app"
+  },
+  {
+    "width": 1280,
+    "dimensions": {
+      "width": 1280,
+      "body": 1280,
+      "doc": 1280
+    },
+    "page_errors": [],
+    "mode": "static HTML only; no native app"
+  }
+]
