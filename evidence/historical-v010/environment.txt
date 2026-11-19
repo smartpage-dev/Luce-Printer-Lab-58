@@ -1,0 +1,5 @@
+Local verification: OpenJDK 21 with --release 17 for pure Java.
+No Android SDK, SDK manager, Gradle distribution or Android emulator available.
+curl DNS lookup failed: dl.google.com, services.gradle.org, repo.maven.apache.org.
+No APK produced. No GitHub workflow executed. No physical printer access.
+Guide rendered in /usr/bin/chromium at 390 and 1280 CSS px with no viewport overflow.

@@ -1,0 +1,23 @@
+{
+  "scope": "HTML guide only, NOT Android UI",
+  "results": [
+    {
+      "width": 390,
+      "loaded": "actual HTML via set_content; native file navigation blocked by environment",
+      "horizontal_overflow": false,
+      "script_errors": [],
+      "external_requests": [],
+      "guided_section": true,
+      "apk_warning": true
+    },
+    {
+      "width": 1280,
+      "loaded": "actual HTML via set_content; native file navigation blocked by environment",
+      "horizontal_overflow": false,
+      "script_errors": [],
+      "external_requests": [],
+      "guided_section": true,
+      "apk_warning": true
+    }
+  ]
+}

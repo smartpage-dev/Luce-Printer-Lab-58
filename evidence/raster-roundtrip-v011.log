@@ -1,0 +1,7 @@
+PASS 1: fixture 0 GSv0 exact pixels and ZBar QR text match
+PASS 2: fixture 0 ESCstar exact pixels and ZBar QR text match
+NOTE: OpenCV classic detector did not decode fixture 1; ZBar verified exact data. Phone validation still required.
+PASS 3: fixture 1 GSv0 exact pixels and ZBar QR text match
+NOTE: OpenCV classic detector did not decode fixture 1; ZBar verified exact data. Phone validation still required.
+PASS 4: fixture 1 ESCstar exact pixels and ZBar QR text match
+TOTAL 4 digital raster round trips; not Android ZXing or physical print tests

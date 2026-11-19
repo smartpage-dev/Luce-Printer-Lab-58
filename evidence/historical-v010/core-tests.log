@@ -1,0 +1,45 @@
+PASS 1 short demo accepted
+PASS 2 long demo accepted
+PASS 3 reject cleartext URL
+PASS 4 reject URL credentials
+PASS 5 reject control injection
+PASS 6 reject non-ASCII QR input
+PASS 7 bound QR input
+PASS 8 reject raw ASCII command injection
+PASS 9 plain text has no initial ESC
+PASS 10 init explicit
+PASS 11 test ID validated
+PASS 12 native model 2 bytes
+PASS 13 native module bytes
+PASS 14 native M correction bytes
+PASS 15 native length and exact stored payload
+PASS 16 native print opcode
+PASS 17 reject native module zero
+PASS 18 bound native module size
+PASS 19 raster width bytes and row count
+PASS 20 MSB horizontal packing and white padding
+PASS 21 reject ragged raster
+PASS 22 limit width
+PASS 23 limit height
+PASS 24 limit packet size
+PASS 25 column header and 24-dot line spacing
+PASS 26 column MSB packing
+PASS 27 column partial last band padding
+PASS 28 line spacing restored
+PASS 29 bounded grid dimensions
+PASS 30 single explicit status query
+PASS 31 write is not print confirmation
+PASS 32 no completed writes does not prove no partial bytes
+PASS 33 flush/ack uncertainty
+PASS 34 crash does not replay
+PASS 35 restart preserves completed transfer status
+PASS 36 no auto retry sending
+PASS 37 no auto retry sent_unconfirmed
+PASS 38 no auto retry outcome_unknown
+PASS 39 no auto retry interrupted_unknown
+PASS 40 unrecognized evidence not allowed
+PASS 41 operator QR evidence distinct
+PASS 42 error excludes private messages
+PASS 43 SHA256 reference
+TOTAL 43 pure-Java checks passed; no Bluetooth or hardware exercised
+SYNTAX_ONLY: 7 Java files parsed; Android API linkage NOT checked

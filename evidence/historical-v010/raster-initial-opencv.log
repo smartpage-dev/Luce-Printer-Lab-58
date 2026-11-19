@@ -1,0 +1,10 @@
+PASS 1: fixture 0 GSv0 exact pixels and OpenCV QR text match
+PASS 2: fixture 0 ESCstar exact pixels and OpenCV QR text match
+Traceback (most recent call last):
+  File "/mnt/data/PrinterLab58_v0.1.0/tools/test_raster_roundtrip.py", line 66, in <module>
+    if __name__=='__main__': main()
+                             ~~~~^^
+  File "/mnt/data/PrinterLab58_v0.1.0/tools/test_raster_roundtrip.py", line 62, in main
+    assert decoded==url,(method,decoded)
+           ^^^^^^^^^^^^
+AssertionError: ('GSv0', '')

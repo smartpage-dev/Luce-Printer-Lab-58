@@ -1,0 +1,26 @@
+{
+  "checked_at_utc": "2026-11-18T08:06:24.691290+00:00",
+  "android_home": null,
+  "android_sdk_root": null,
+  "gradle_on_path": "",
+  "apk_built": false,
+  "github_workflow_executed": false,
+  "hardware_tested": false,
+  "download_probes": [
+    {
+      "host": "dl.google.com",
+      "returncode": 6,
+      "last_error_line": "  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: dl.google.com"
+    },
+    {
+      "host": "services.gradle.org",
+      "returncode": 6,
+      "last_error_line": "  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: services.gradle.org"
+    },
+    {
+      "host": "repo.maven.apache.org",
+      "returncode": 6,
+      "last_error_line": "  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: repo.maven.apache.org"
+    }
+  ]
+}
